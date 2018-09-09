@@ -14,5 +14,6 @@ public class Boleto {
     private String destino;
     private int tipo;
     private float precio;
+    private float dd;
     
 }
