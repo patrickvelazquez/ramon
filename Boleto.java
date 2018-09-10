@@ -11,9 +11,17 @@ package inicial;
  */
 public class Boleto { 
     private int idBoleto;
+    private String nombreCliente;
     private String destino;
     private int tipo;
     private float precio;
-    private float dd;
+    
+    public Boleto(){
+    this.idBoleto=0;
+    this.nombreCliente="";
+    this.destino="";
+    this.tipo=0;
+    this.precio=0.0f;
+    }
     
 }
