@@ -244,17 +244,13 @@ public class cuentaBanco
     }
     public boolean aperturaCuenta(float importe,int edad)
     {
+        boolean aprobado=false;
         if(edad>=18)
         {
             if(importe>=1000)
-                return true;
-            else
-                return false; 
+                aprobado = true; 
         }
-        else
-        {
-            return false;
-        }
+        return aprobado;
     }   
     public String fechaApertura()
     {
@@ -266,11 +262,10 @@ public class cuentaBanco
     }
     public String informacionCliente()
     {
-        return "Nombre:"+nombre+"  Domicilio: "+domicilio+" Nacimiento: "+fechaNacimiento()+"  Edad: " + edad+"\nNúmero de Celular: "+numeroCelular;
+        return "Nombre:"+nombre+"\nDomicilio: "+domicilio+"\nNacimiento: "+fechaNacimiento()+"\nEdad: " + edad+"\nNúmero de Celular: "+numeroCelular;
     }
-    
     public String informacionCuenta()
     {
-        return "Fecha de apertura: "+fechaApertura()+" Sucursal: "+nombreSucursal+" Saldo: $"+saldo;
+        return "Fecha de apertura: "+fechaApertura()+"\nSucursal: "+nombreSucursal+"\nSaldo: $"+saldo;
     }
 }
