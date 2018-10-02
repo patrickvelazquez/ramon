@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package practica1;
-
+import javax.swing.JOptionPane;
 /**
  *
  * @author Konakun
@@ -148,17 +148,16 @@ public class CuentaAhorro {
     
     public void depositoDeEfectivo(float montoDeEfectivo){
         this.saldo = saldo + montoDeEfectivo;
-        System.out.println("Saldo en cuenta: $" + saldo);
+        JOptionPane.showMessageDialog(null, "Saldo en cuenta: $" + saldo);
     }
     
     public void retiroDeEfectivo(float montoDeEfectivo){
         if(montoDeEfectivo < saldo){
             this.saldo = saldo - montoDeEfectivo;
-            System.out.println("Se ha retirado $" + montoDeEfectivo);
-            System.out.println("Queda en cuenta: $" + saldo);
+            JOptionPane.showMessageDialog(null, "Se ha retirado $" + montoDeEfectivo + "\nQueda en cuenta: $" + saldo);
         }
         else{
-            System.out.println("Saldo Insuficiente");
+            JOptionPane.showMessageDialog(null, "Saldo Insuficiente");
         }
     }
     

@@ -6,6 +6,7 @@
 package practica1;
 
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,41 +23,27 @@ public class BoletoMain {
         
         int numId = 0, tipo = 0, opcion = 0, edad = 0;
         String cliente = "", destino = "", fecha = "";
-        float precio = 0.0f, subtotal = 0.0f, descuento=0.0f, impuesto=0.0f, total = 0.0f;
+        float precio = 0.0f;
+        Object menu[] = {"1.- Iniciar Objeto", "2.- Calcular Subtotal", "3.- Calcular Impuesto", "4.- Calcular Descuento", "5.- Calcular Total", "6.- Consultar Boleto", "7.- Imprimir", "8.- Modificar Boleto", "9.- Salir"};
+        Object primerSubMenu[] = {"1.- Obtener numero identificador", "2.- Obtener nombre del cliente", "3.- Obtener destino del boleto", "4.- Obtener tipo de boleto", "5.- Obtener precio del boleto", "6.- Obtener fecha del boleto", "7.- Salir al menu"};
+        Object segundoSubMenu[] = {"1.- Modificar numero identificador", "2.- Modificar nombre del cliente", "3.- Modificar destino del boleto", "4.- Modificar tipo de boleto", "5.- Modificar precio del boleto", "6.- Modificar fecha del boleto", "7.- Modificar la edad del cliente", "8.- Salir al menu"};
+        
+        String opcMenu = "";
         
         Boleto nuevo = new Boleto();
         do{
-            System.out.println("1.- Iniciar Objeto");
-            System.out.println("2.- Calcular Subtotal");
-            System.out.println("3.- Calcular Impuesto");
-            System.out.println("4.- Calcular Descuento");
-            System.out.println("5.- Calcular Total");
-            System.out.println("6.- Consultar Boleto");
-            System.out.println("7.- Imprimir");
-            System.out.println("8.- Modificar Boleto");
-            System.out.println("9.- Salir");
-            
-            opcion = in.nextInt();
-            
-            switch(opcion){
-                case 1:
-                    numId = numId+1;
-                    
-                    System.out.println("Dame el nombre del cliente");
-                    in.nextLine();
-                    cliente = in.nextLine();
-                    System.out.println("Dame el destino del cliente");
-                    in.nextLine();
-                    destino = in.nextLine();
-                    System.out.println("Dame el precio del Boleto");
-                    precio = in.nextFloat();
-                    System.out.println("Dame el tipo de boleto (1- Simple / 2- Redondo)");
-                    tipo = in.nextInt();
-                    System.out.println("Dame la fecha");
-                    in.nextLine();
-                    fecha = in.nextLine();
-                    System.out.println("Dame la edad del cliente");
-                    edad = in.nextInt();
+            opcMenu = (String) JOptionPane.showInputDialog(null, "Elije una opción", "Menu", JOptionPane.QUESTION_MESSAGE, null, menu, menu[0]);
+                        
+            switch(opcMenu){
+                case "1.- Iniciar Objeto":
+                    /*"Dame el numero de identificacion"*/;
+                    numId = Integer.parseInt(JOptionPane.showInputDialog(null, "Dame el numero identificador", "Boleto", JOptionPane.QUESTION_MESSAGE));
+                    cliente = JOptionPane.showInputDialog(null, "Dame el nombre del cliente", "Boleto", JOptionPane.QUESTION_MESSAGE);
+                    destino = JOptionPane.showInputDialog(null, "Dame el destino del cliente", "Boleto", JOptionPane.QUESTION_MESSAGE);
+                    tipo = Integer.parseInt(JOptionPane.showInputDialog(null, "Dame el tipo de boleto (1- Simple / 2- Redondo)", "Boleto", JOptionPane.QUESTION_MESSAGE));
+                    precio = Float.parseFloat(JOptionPane.showInputDialog(null, "Dame el precio", "Boleto", JOptionPane.QUESTION_MESSAGE));
+                    fecha = JOptionPane.showInputDialog(null, "Dame la fecha", "Boleto", JOptionPane.QUESTION_MESSAGE);
+                    edad = Integer.parseInt(JOptionPane.showInputDialog(null, "Dame la edad del cliente", "Boleto", JOptionPane.QUESTION_MESSAGE));
                     
                     nuevo.setNumId(numId);
                     nuevo.setCliente(cliente);
@@ -66,131 +53,96 @@ public class BoletoMain {
                     nuevo.setPrecio(precio);
                     
                     break;
-                case 2:
-                    subtotal = nuevo.calcularSubtotal();
-                    System.out.println("El subtotal es de: $" + subtotal);
+                case "2.- Calcular Subtotal":
+                    JOptionPane.showMessageDialog(null, "El subtotal es de: $" + nuevo.calcularSubtotal());
                     break;
-                case 3:
-                    impuesto = nuevo.calcularImpuesto();
-                    System.out.println("El Impuesto es de: $" + impuesto);
+                case "3.- Calcular Impuesto":
+                    JOptionPane.showMessageDialog(null, "El impuesto es de: $" + nuevo.calcularImpuesto());
                     break;
-                case 4:
-                    descuento = nuevo.calcularDescuento(edad);
-                    System.out.println("El descuento es de: $" + descuento);
+                case "4.- Calcular Descuento":
+                    JOptionPane.showMessageDialog(null, "El descuento es de: $" + nuevo.calcularDescuento(edad));
                     break;
-                case 5:
-                    total = nuevo.calcularTotal(edad);
-                    System.out.println("El total es de: $" + total);
+                case "5.- Calcular Total":
+                    JOptionPane.showMessageDialog(null, "El total es de: $" + nuevo.calcularTotal(edad));
                     break;
-                case 6:
+                case "6.- Consultar Boleto":
                     do{
-                        System.out.println("1.- Obtener numero identificador");
-                        System.out.println("2.- Obtener nombre del cliente");
-                        System.out.println("3.- Obtener destino del boleto");
-                        System.out.println("4.- Obtener tipo de boleto");
-                        System.out.println("5.- Obtener precio del boleto");
-                        System.out.println("6.- Obtener fecha del boleto");
-                        System.out.println("7.- Salir al menu");
+                        opcMenu = (String) JOptionPane.showInputDialog(null, "Elije una opción", "Menu", JOptionPane.QUESTION_MESSAGE, null, primerSubMenu, primerSubMenu[0]);
                         
-                        opcion = in.nextInt();
-                        
-                        switch(opcion){
-                            case 1:
-                                System.out.println("El numero identificador del boleto es: " + nuevo.getNumId());
+                        switch(opcMenu){
+                            case "1.- Obtener numero identificador":
+                                JOptionPane.showMessageDialog(null, "El numero identificador del boleto es: " + nuevo.getNumId());
                                 break;
-                            case 2:
-                                System.out.println("El nombre del cliente es: " + nuevo.getCliente());
+                            case "2.- Obtener nombre del cliente":
+                                JOptionPane.showMessageDialog(null, "El nombre del cliente es: " + nuevo.getCliente());
                                 break;
-                            case 3:
-                                System.out.println("El destino del boleto es: " + nuevo.getDestino());
+                            case "3.- Obtener destino del boleto":
+                                JOptionPane.showMessageDialog(null, "El destino del boleto es: " + nuevo.getDestino());
                                 break;
-                            case 4:
-                                System.out.println("El tipo del boleto es: " + nuevo.getTipo());
+                            case "4.- Obtener tipo de boleto":
+                                JOptionPane.showMessageDialog(null, "El tipo del boleto es: " + nuevo.getTipo());
                                 break;
-                            case 5:
-                                System.out.println("El precio del boleto es: $" + nuevo.getPrecio());
+                            case "5.- Obtener precio del boleto":
+                                JOptionPane.showMessageDialog(null, "El precio del boleto es: $" + nuevo.getPrecio());
                                 break;
-                            case 6:
-                                System.out.println("La fecha del boleto es: " + nuevo.getFecha());
+                            case "6.- Obtener fecha del boleto":
+                               JOptionPane.showMessageDialog(null, "La fecha del boleto es: " + nuevo.getFecha());
                                 break;
-                            case 7:
+                            case "7.- Salir al menu":
                                 break;
                             default:
-                                System.out.println("No es una opción valida");
+                                JOptionPane.showMessageDialog(null ,"No es una opción valida");
                         }
-                    }while(opcion != 7);
+                    }while(!"7.- Salir al menu".equals(opcMenu));
                     break;
-                case 7:
-                    System.out.println(nuevo.imprimirBoleto(nuevo,edad));
+                case "7.- Imprimir":
+                    JOptionPane.showMessageDialog(null,nuevo.imprimirBoleto(nuevo, edad));
                     break;
-                case 8:
+                case "8.- Modificar Boleto":
                     do{
-                        System.out.println("1.- Cambiar numero identificador");
-                        System.out.println("2.- Cambiar nombre del cliente");
-                        System.out.println("3.- Cambiar destino del boleto");
-                        System.out.println("4.- Cambiar tipo de boleto");
-                        System.out.println("5.- Cambiar precio del boleto");
-                        System.out.println("6.- Cambiar fecha del boleto");
-                        System.out.println("7.- Cambiar la edad del cliente");
-                        System.out.println("8.- Salir");
+                        opcMenu = (String) JOptionPane.showInputDialog(null, "Elije una opción", "Menu", JOptionPane.QUESTION_MESSAGE, null, segundoSubMenu, segundoSubMenu[0]);
                         
-                        opcion = in.nextInt();
-                        
-                        switch(opcion){
-                            case 1:
-                                System.out.println("Dame el numero identificador");
-                                numId = in.nextInt();
+                        switch(opcMenu){
+                            case "1.- Modificar numero identificador":
+                                numId = Integer.parseInt(JOptionPane.showInputDialog(null, "Dame el numero identificador", "Modificar boleto", JOptionPane.QUESTION_MESSAGE));
                                 nuevo.setNumId(numId);
                                 break;
-                            case 2:
-                                System.out.println("Dame el nombre del cliente");
-                                in.nextLine();
-                                cliente = in.nextLine();
+                            case "2.- Modificar nombre del cliente":
+                                cliente = JOptionPane.showInputDialog(null, "Dame el nombre del cliente", "Modificar boleto", JOptionPane.QUESTION_MESSAGE);
                                 nuevo.setCliente(cliente);
                                 break;
-                            case 3:
-                                System.out.println("Dame el destino del cliente");
-                                in.nextLine();
-                                destino = in.nextLine();
+                            case "3.- Modificar destino del boleto":
+                                destino = JOptionPane.showInputDialog(null, "Dame el destino del cliente", "Modificar boleto", JOptionPane.QUESTION_MESSAGE);
                                 nuevo.setDestino(destino);
                                 break;
-                            case 4:
-                                System.out.println("Dame el tipo de boleto (1- Simple / 2- Redondo)");
-                                tipo = in.nextInt();
+                            case "4.- Modificar tipo de boleto":
+                                tipo = Integer.parseInt(JOptionPane.showInputDialog(null, "Dame el tipo de boleto (1- Simple / 2- Redondo)", "Modificar boleto", JOptionPane.QUESTION_MESSAGE));
                                 nuevo.setTipo(tipo);
                                 break;
-                            case 5:
-                                System.out.println("Dame el precio del Boleto");
-                                precio = in.nextFloat();
+                            case "5.- Modificar precio del boleto":
+                                precio = Float.parseFloat(JOptionPane.showInputDialog(null, "Dame el precio", "Modificar boleto", JOptionPane.QUESTION_MESSAGE));
                                 nuevo.setPrecio(precio);
                                 break;
-                            case 6:
-                                System.out.println("Dame la fecha");
-                                in.nextLine();
-                                fecha = in.nextLine();
+                            case "6.- Modificar fecha del boleto":
+                                fecha = JOptionPane.showInputDialog(null, "Dame la fecha", "Modificar boleto", JOptionPane.QUESTION_MESSAGE);
                                 nuevo.setFecha(fecha);
                                 break;
-                            case 7:
-                                System.out.println("Dame la edad del cliente");
-                                edad = in.nextInt();
+                            case "7.- Modificar la edad del cliente":
+                                edad = Integer.parseInt(JOptionPane.showInputDialog(null, "Dame la edad del cliente", "Modificar boleto", JOptionPane.QUESTION_MESSAGE));
                                 break;
-                            case 8:
+                            case "8.- Salir al menu":
                                 break;
                             default:
-                                System.out.println("No es una opción valida");
+                                JOptionPane.showMessageDialog(null ,"No es una opción valida");
                         }
-                    }while(opcion != 8);
+                    }while(!"8.- Salir al menu".equals(opcMenu));
                     break;
-                case 9:
-                    System.out.println("Gracias...");
+                case "9.- Salir":
+                    JOptionPane.showMessageDialog(null ,"Gracias...");
                     break;
                 default:
-                    System.out.println("No es una opción valida");
+                    JOptionPane.showMessageDialog(null, "No es una opción valida");
                 }
-            System.out.println("Oprima cualquier tecla para continuar...");
-            in.nextLine();
-            in.nextLine();
-        }while(opcion!=9);
-        
+        }while(!"9.- Salir".equals(opcMenu)); 
     }
 }

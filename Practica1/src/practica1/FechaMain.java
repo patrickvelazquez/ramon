@@ -5,6 +5,7 @@
  */
 package practica1;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,89 +19,70 @@ public class FechaMain {
     public static void main(String[] args) {
         // TODO code application logic here
         Scanner in = new Scanner(System.in);
-        int dia=0, mes=0, año=0, opcion=0;
+        Object menu[] = {"1.- Iniciar Objeto","2.- Consultar Fecha","3.- Cuantos dias tiene el mes","4.- Es año bisiesto","5.- Modificar Fecha","6.- Salir"};
+        Object subMenu[] = {"1.- Dia", "2.- Mes", "3.- Año", "Regresar"};
+        String opcMenu = "";
+        int dia=0, mes=0, año=0;
         Fecha hoy = new Fecha();
         do{
-            System.out.println("1.- Iniciar Objeto");
-            System.out.println("2.- Consultar Fecha");
-            System.out.println("3.- Cuantos dias tiene el mes");
-            System.out.println("4.- Es Año Bisisesto");
-            System.out.println("5.- Modificar Fecha");
-            System.out.println("6.- Salir");
+            opcMenu = (String) JOptionPane.showInputDialog(null,"Elije una opción", "Menu", JOptionPane.QUESTION_MESSAGE, null, menu, menu[0]);
             
-            opcion = in.nextInt();
-            
-            switch(opcion){
-                case 1:
-                    System.out.println("Dame el dia");
-                    dia = in.nextInt();
+            switch(opcMenu){
+                case "1.- Iniciar Objeto":
+                    dia = Integer.parseInt(JOptionPane.showInputDialog(null, "Dame el dia", "Fecha", JOptionPane.QUESTION_MESSAGE));
+                    mes = Integer.parseInt(JOptionPane.showInputDialog(null, "Dame el mes", "Fecha", JOptionPane.QUESTION_MESSAGE));
+                    año = Integer.parseInt(JOptionPane.showInputDialog(null, "Dame el año", "Fecha", JOptionPane.QUESTION_MESSAGE));
                     
-                    System.out.println("Dame el Mes");
-                    mes = in.nextInt();
-                    
-                    System.out.println("Dame el Año");
-                    año = in.nextInt();
                     hoy.setDia(dia);
                     hoy.setMes(mes);
                     hoy.setAño(año);
                     break;
-                case 2:
-                    System.out.println("La fecha es: " + hoy.fechaConFormato());
+                case "2.- Consultar Fecha":
+                    JOptionPane.showMessageDialog(null, "La fecha es: " + hoy.fechaConFormato());
                     break;
-                case 3:
-                    mes = hoy.getMes();
-                    System.out.println("El mes numero " + mes + " tiene " + hoy.diasMeses());
+                case "3.- Cuantos dias tiene el mes":
+                    JOptionPane.showMessageDialog(null, "El mes numero tiene " + hoy.diasMeses() + " dias");
                     break;
-                case 4:
+                case "4.- Es año bisiesto":
                     if(hoy.isBisiesto()){
-                        System.out.println("El año " + hoy.getAño() + " es bisiesto");
+                        JOptionPane.showMessageDialog(null, "El año " + hoy.getAño() + " es bisiesto");
                     }
                     else{
-                        System.out.println("El año " + hoy.getAño() + " no es bisiesto");
+                        JOptionPane.showMessageDialog(null, "El año " + hoy.getAño() + "no es bisiesto");
                     }
                     break;
-                case 5:
+                case "5.- Modificar Fecha":
+                    String opcSubMenu = "";
                     do{
-                        System.out.println("Elija la opcion");
-                        System.out.println("1.- Modificar Dia");
-                        System.out.println("2.- Modificar Mes");
-                        System.out.println("3.- Modificar Año");
-                        System.out.println("4.- Salir");
+                        opcSubMenu = (String) JOptionPane.showInputDialog(null, "Seleccione la opcion a modificar", "Modificar fecha", JOptionPane.QUESTION_MESSAGE, null, subMenu,subMenu[0]);
                         
-                        opcion = in.nextInt();
-                        
-                        switch(opcion){
-                            case 1:
-                                System.out.println("Dame el dia");
-                                dia = in.nextInt();
+                        switch(opcSubMenu){
+                            case "1.- Dia":
+                                dia = Integer.parseInt(JOptionPane.showInputDialog(null, "Dame el dia", "Modificar fecha", JOptionPane.QUESTION_MESSAGE));
                                 hoy.setDia(dia);
                                 break;
-                            case 2:
-                                System.out.println("Dame el Mes");
-                                mes = in.nextInt();
+                            case "2.- Mes":
+                                mes = Integer.parseInt(JOptionPane.showInputDialog(null, "Dame el mes", "Modificar fecha", JOptionPane.QUESTION_MESSAGE));
                                 hoy.setMes(mes);
                                 break;
-                            case 3:
-                                System.out.println("Dame el Año");
-                                año = in.nextInt();
+                            case "3.- Año":
+                                año = Integer.parseInt(JOptionPane.showInputDialog(null, "Dame el año", "Modificar fecha", JOptionPane.QUESTION_MESSAGE));
                                 hoy.setAño(año);
                                 break;
-                            case 4:
+                            case "Regresar":
                                 break;
                             default:
-                                System.out.println("No es una opción valida");
+                                JOptionPane.showMessageDialog(null ,"No es una opción valida");
                         }
-                    }while(opcion!=4);
-                case 6:
-                    System.out.println("Gracias...");
+                    }while(!"Regresar".equals(opcSubMenu));
+                    break;
+                case "6.- Salir":
+                    JOptionPane.showMessageDialog(null, "Gracias por utilizar este programa");
                     break;
                 default:
-                    System.out.println("No es una opción valida");
+                    JOptionPane.showMessageDialog(null ,"No es una opción valida");
             }
-            System.out.println("Oprima cualquier tecla para continuar...");
-            in.nextLine();
-            in.nextLine();
-        }while(opcion!=6);
+        }while(!"6.- Salir".equals(opcMenu));
     }
     
 }
