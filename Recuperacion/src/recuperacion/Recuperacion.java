@@ -1,5 +1,5 @@
 package recuperacion;
-
+//Autor: Marco Camacho
 import java.util.Scanner;
 
 public class Recuperacion 
