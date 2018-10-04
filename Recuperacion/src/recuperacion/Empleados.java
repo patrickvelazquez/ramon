@@ -1,5 +1,5 @@
 package recuperacion;
-
+//Autor: Marco Camacho
 public class Empleados 
 {
     private int numeroEmpleado,nivel,numeroVentas;
