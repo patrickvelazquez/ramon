@@ -7,7 +7,7 @@ package preexamen;
 import javax.swing.JOptionPane;
 /**
  *
- * @author Luis Espinoza
+ * @author Kenneth Stoney Wilson Herrera
  */
 public class PreExamen {
 
@@ -15,98 +15,86 @@ public class PreExamen {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        int id;
-        String nombre;
-        int unidad;
-        float precioUnitario;
-        String fechaCaducidad;
-        float temperatura;
-        int numeroFactura;
-        String fecha,concepto; 
-                ProductoPerecedero producto=null;
-                float cantidad;
-            int tipoPago;
-            String rfc, nombreCliente, domicilioFiscal, fechaFacturacion;
-            float iva;
-        Object menu[]={"Crear producto","Crear factura","Calcular precio producto","Calcular subtotal","Calcular impuesto","Calcular total","Salir"};
-        String opcMenu="";
-        ProductoPerecedero pro = new ProductoPerecedero();
-        Factura fac = new Factura();
+        Object menu[] = {"1. Crear Producto","2. Generar Factura", "3. Calcular Subtotal", "4. Calcular Total", "5. Salir"};
+        Object menuUnidad[] = {"1. Kilogramos", "2. Litros", "3. Piezas"};
+        Object menuTipoPago[] = {"1. Contado", "2. Crédito"};
+        int idP = 0, tipoU = 0, numero = 0, tipoPago = 0;
+        float precio = 0.0f, iva = 0.0f, temper = 0.0f, cantidad = 0.0f;
+        String opcMenu = "", nombreP = "", opUnidad = "",opTPago = "", fechaCad = "", fechaNV = "", fechaFactura = "", concepto = "";
+        String rfc = "", nombreC = "", domFiscal = "";
+        Perecedero prod = new Perecedero();
+        Factura fact = new Factura();
         do{
-            opcMenu=(String)JOptionPane.showInputDialog(null,"Elija una opción","Menú",JOptionPane.QUESTION_MESSAGE,null,menu,menu[0]);
+            opcMenu = (String) JOptionPane.showInputDialog(null, "Elige una opción", "Abarrotes del Gato Feliz - Menú",
+                    JOptionPane.QUESTION_MESSAGE, null, menu, menu[0]);
             switch(opcMenu){
-                case (String)"Crear producto":
-                    
-                    id=Integer.parseInt(JOptionPane.showInputDialog(null,"Ingresa el id del producto","Producto",JOptionPane.QUESTION_MESSAGE));
-                    pro.setId(id);
-                    
-                    nombre=JOptionPane.showInputDialog(null,"Ingresa el nombre del producto","Producto",JOptionPane.QUESTION_MESSAGE);
-                    pro.setNombre(nombre);
-                    
-                    unidad=Integer.parseInt(JOptionPane.showInputDialog(null,"Ingresa unidad \n1. Kg\n2. Litros \n3. Pieza","Producto",JOptionPane.QUESTION_MESSAGE));
-                    pro.setUnidad(unidad);
-                    
-                    precioUnitario=Float.parseFloat(JOptionPane.showInputDialog(null,"Ingresa el precio unitario","Producto",JOptionPane.QUESTION_MESSAGE));
-                    pro.setPrecioUnitario(precioUnitario);
-                    
-                    fechaCaducidad=JOptionPane.showInputDialog(null,"Ingresa la fecha de caducidad","Producto",JOptionPane.QUESTION_MESSAGE);
-                    pro.setFechaCaducidad(fechaCaducidad);
-                    
-                    temperatura=Float.parseFloat(JOptionPane.showInputDialog(null,"Ingresa la temperatura del producto","Producto",JOptionPane.QUESTION_MESSAGE));
+                case "1. Crear Producto":
+                    idP = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingresa el Id del Producto","Crear Producto",JOptionPane.QUESTION_MESSAGE));
+                    nombreP = JOptionPane.showInputDialog(null, "Introduzca el Nombre del Producto", "Crear Producto", JOptionPane.QUESTION_MESSAGE);
+                    opUnidad = (String) JOptionPane.showInputDialog(null, "Elija la Unidad de Producto", "Crear Producto", 
+                            JOptionPane.QUESTION_MESSAGE, null, menuUnidad, menuUnidad[0]);
+                    precio = Float.parseFloat(JOptionPane.showInputDialog(null, "Ingresa el Precio Unitario", "Crear Producto", JOptionPane.QUESTION_MESSAGE));
+                    fechaCad = JOptionPane.showInputDialog(null, "Introduzca la Fecha de Caducidad", "Crear Producto", JOptionPane.QUESTION_MESSAGE);
+                    temper = Float.parseFloat(JOptionPane.showInputDialog(null, "Ingresa la Temperatura", "Crear Producto", JOptionPane.QUESTION_MESSAGE));
+                    if(opUnidad.equals("1. Kilogramos")){
+                        tipoU = 1;
+                    }else if(opUnidad.equals("2. Litros")){
+                        tipoU = 2;
+                    }else if(opUnidad.equals("3. Piezas")){
+                        tipoU = 3;
+                    }
+                    prod.setIdProducto(idP);
+                    prod.setNombre(nombreP);
+                    prod.setUnidad(tipoU);
+                    prod.setPrecioUnitario(precio);
+                    prod.setFechaCad(fechaCad);
+                    prod.setTemperatura(temper);
                     break;
-                    
-                case (String)"Crear factura":
-                    
-                    numeroFactura=Integer.parseInt(JOptionPane.showInputDialog(null,"Ingresa el numero de factura","Factura",JOptionPane.QUESTION_MESSAGE));
-                    fac.setNumero(numeroFactura);
-                    
-                    fecha=JOptionPane.showInputDialog(null,"Ingresa la fecha de factura","Factura",JOptionPane.QUESTION_MESSAGE);
-                    fac.setFecha(fecha);
-                    
-                    concepto=JOptionPane.showInputDialog(null,"Ingresa el concepto de factura","Factura",JOptionPane.QUESTION_MESSAGE);
-                    fac.setConcepto(concepto);
-                    
-                    fac.setProducto(pro);
-                    
-                    cantidad=Float.parseFloat(JOptionPane.showInputDialog(null,"Ingresa la cantidad de producto","Factura",JOptionPane.QUESTION_MESSAGE));
-                    fac.setCantidad(cantidad);
-                    
-                    tipoPago=Integer.parseInt(JOptionPane.showInputDialog(null,"Ingresa el tipo de pago \n 1.Contado\n2.Credito","Factura",JOptionPane.QUESTION_MESSAGE));
-                    fac.setTipoPago(tipoPago);
-                    
-                    rfc=JOptionPane.showInputDialog(null,"Ingresa el rfc","Factura",JOptionPane.QUESTION_MESSAGE);
-                    fac.setRfc(rfc);
-                    
-                    nombreCliente=JOptionPane.showInputDialog(null,"Ingresa el nombre de cliente","Factura",JOptionPane.QUESTION_MESSAGE);
-                    fac.setNombreCliente(nombreCliente);
-                    
-                    domicilioFiscal=JOptionPane.showInputDialog(null,"Ingresa el domicilio fiscal","Factura",JOptionPane.QUESTION_MESSAGE);
-                    fac.setDomicilioFiscal(domicilioFiscal);
-                    
-                    fechaFacturacion=JOptionPane.showInputDialog(null,"Ingresa la fecha de factura","Factura",JOptionPane.QUESTION_MESSAGE);
-                    fac.setFechaFacturacion(fechaFacturacion);
-                    
-                    iva=Float.parseFloat(JOptionPane.showInputDialog(null,"Ingresa el IVA","Factura",JOptionPane.QUESTION_MESSAGE));
-                    fac.setIva(iva);
-                    
-                    
+                case "2. Generar Factura":
+                    numero = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingresa el Número de Venta","Generar Fsctura",JOptionPane.QUESTION_MESSAGE));
+                    fechaNV = JOptionPane.showInputDialog(null,"Ingresa la Fecha de la Venta", "Generar Factura",JOptionPane.QUESTION_MESSAGE);
+                    concepto = JOptionPane.showInputDialog(null,"Ingresa el Concepto", "Generar Factura",JOptionPane.QUESTION_MESSAGE);
+                    cantidad = Float.parseFloat(JOptionPane.showInputDialog(null,"Ingresa la Cantidad del Producto","Generar Factura",JOptionPane.QUESTION_MESSAGE));
+                    opTPago = (String) JOptionPane.showInputDialog(null, "Elija la Unidad de Producto", "Crear Producto", 
+                            JOptionPane.QUESTION_MESSAGE, null, menuTipoPago, menuTipoPago[0]);
+                    rfc = JOptionPane.showInputDialog(null, "Ingresa el RFC del Cliente","Generar Factura",JOptionPane.QUESTION_MESSAGE);
+                    nombreC = JOptionPane.showInputDialog(null, "Ingresa el Nombre del Cliente", "Generar Factura", JOptionPane.QUESTION_MESSAGE);
+                    domFiscal = JOptionPane.showInputDialog(null, "Ingresa el Domicilio Fiscal", "Generar Factura", JOptionPane.QUESTION_MESSAGE);
+                    fechaFactura = JOptionPane.showInputDialog(null,"Ingresa la Fecha de Facturación", "Generar Factura", JOptionPane.QUESTION_MESSAGE);
+                    iva = Float.parseFloat(JOptionPane.showInputDialog(null,"Ingresa el IVA (%)","Generar Factura",JOptionPane.QUESTION_MESSAGE));
+                    if(opTPago.equals(menuTipoPago[0])){
+                        tipoPago = 1;
+                    }else if(opTPago.equals(menuTipoPago[1])){
+                        tipoPago = 2;
+                    }
+                    fact.setNumero(numero);
+                    fact.setFecha(fechaNV);
+                    fact.setConcepto(concepto);
+                    fact.setProducto(prod);
+                    fact.setCantidad(cantidad);
+                    fact.setTipoPago(tipoPago);
+                    fact.setRfc(rfc);
+                    fact.setNombre(nombreC);
+                    fact.setDomFiscal(domFiscal);
+                    fact.setFechaFactura(fechaFactura);
+                    fact.setIva(iva);
                     break;
-                case (String)"Calcular precio producto":
-                    JOptionPane.showMessageDialog(null,"EL precio del producto es:"+pro.calcularPrecio());
+                case "3. Calcular Subtotal":
+                    JOptionPane.showMessageDialog(null, "El precio de producto es $" + prod.calcularPrecio() +  
+                            "\nEl Subtotal es: " + fact.calcularPago(), "Calcular Subtotal", JOptionPane.INFORMATION_MESSAGE);
                     break;
-                case (String)"Calcular subtotal":
-                    JOptionPane.showMessageDialog(null,"El subtotal es: "+fac.calcularPago());
+                case "4. Calcular Total":
+                    JOptionPane.showMessageDialog(null, "\nSubtotal: " + fact.calcularPago() + 
+                            "Con un impuesto de "+fact.getIva()+" % :" + fact.calcularImpuesto() + "\n El total a pagar es de $" + fact.calcularTotal(), "Calcular Total", JOptionPane.INFORMATION_MESSAGE);
                     break;
-                case (String)"Calcular total":
-                    JOptionPane.showMessageDialog(null,"El total es: "+fac.calcularTotal());
+                
+                case "5. Salir":
+                    JOptionPane.showMessageDialog(null, "Adiós");
                     break;
-                case (String)"Calcular impuesto":
-                     JOptionPane.showMessageDialog(null,"El total es: "+fac.calcularImpuesto());
-                     break;
             }
-            
-        }while(!opcMenu.equals("Salir"));
+        }while(!opcMenu.equals("5. Salir"));
+        // TODO code application logic here
+        
     }
     
 }
